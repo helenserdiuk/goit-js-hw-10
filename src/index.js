@@ -1,8 +1,8 @@
-import { RestCountriesApi } from './fetchCountriesApi';
-import titleCountry from '../templates/title-country.hbs';
-import infoOfCounrty from '../templates/info-country.hbs';
+import { RestCountriesApi } from './js/fetchCountriesApi';
+import titleCountry from './templates/title-country.hbs';
+import infoOfCounrty from './templates/info-country.hbs';
 import debounce from 'lodash.debounce';
-import '../css/styles.css';
+import './css/styles.css';
 import Notiflix from 'notiflix';
 
 const input = document.querySelector('#search-box');
@@ -13,6 +13,10 @@ const restCountriesApi = new RestCountriesApi();
 
 const onSearchCountries = event => {
   restCountriesApi.name = event.target.value.trim().toLowerCase();
+  if (restCountriesApi.name === '') {
+    listCountry.innerHTML = '';
+    return;
+  }
   restCountriesApi
     .fetchCountries()
     .then(data => {
@@ -20,6 +24,7 @@ const onSearchCountries = event => {
         return;
       }
       if (data.length > 10) {
+        listCountry.innerHTML = '';
         return Notiflix.Notify.info(
           'Too many matches found. Please enter a more specific name.'
         );
