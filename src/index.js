@@ -29,7 +29,7 @@ const onSearchCountries = event => {
           'Too many matches found. Please enter a more specific name.'
         );
       }
-      if (data.length > 2 && data.length <= 10) {
+      if (data.length > 1 && data.length <= 10) {
         listCountry.innerHTML = titleCountry(data);
         classList.add('posts__item');
         return;
