@@ -30,7 +30,9 @@ const onSearchCountries = event => {
         );
       }
       if (data.length > 2 && data.length <= 10) {
-        return (listCountry.innerHTML = titleCountry(data));
+        listCountry.innerHTML = titleCountry(data);
+        classList.add('posts__item');
+        return;
       }
       if (data.length === 1) {
         const {
